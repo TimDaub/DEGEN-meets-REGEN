@@ -2,6 +2,8 @@ import "@farcaster/auth-kit/styles.css";
 import { providers } from "ethers";
 import { AuthKitProvider, SignInButton, useProfile } from "@farcaster/auth-kit";
 
+import Swiper from "./Swiper.jsx";
+
 const config = {
   // For a production app, replace this with an Optimism Mainnet
   // RPC URL from a provider like Alchemy or Infura.
@@ -9,7 +11,7 @@ const config = {
   rpcUrl: "https://mainnet.optimism.io",
   domain: "example.com",
   siweUri: "https://example.com/login",
-  provider: new providers.JsonRpcProvider(undefined, 10)
+  provider: new providers.JsonRpcProvider(undefined, 10),
 };
 
 function App() {
@@ -26,7 +28,8 @@ function App() {
             This example app shows how to use{" "}
             <a
               href="https://docs.farcaster.xyz/auth-kit/introduction"
-              target="_blank" rel="noreferrer"
+              target="_blank"
+              rel="noreferrer"
             >
               Farcaster AuthKit
             </a>{" "}
@@ -75,14 +78,8 @@ function Profile() {
 
   return (
     <>
-      {isAuthenticated ? (
-        <div>
-          <p>
-            Hello, {displayName}! Your FID is {fid}.
-          </p>
-          <p>Your custody address is: </p>
-          <pre>{custody}</pre>
-        </div>
+      {true ? (
+        <Swiper />
       ) : (
         <p>
           Click the "Sign in with Farcaster" button above, then scan the QR code
