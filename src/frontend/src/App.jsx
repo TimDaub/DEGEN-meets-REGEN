@@ -1,6 +1,7 @@
 import "@farcaster/auth-kit/styles.css";
 import { providers } from "ethers";
 import { AuthKitProvider, SignInButton, useProfile } from "@farcaster/auth-kit";
+import { useEffect } from "react";
 
 import Swiper from "./Swiper.jsx";
 
@@ -70,16 +71,35 @@ function App() {
 }
 
 function Profile() {
-  const profile = useProfile();
   const {
     isAuthenticated,
-    profile: { fid, displayName, custody },
-  } = profile;
+    profile: { fid, displayName, custody, ...restProfile },
+  } = useProfile();
+
+  useEffect(() => {
+    const sendProfileToAPI = async () => {
+      try {
+        const response = await fetch("/profile", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ fid, displayName, custody, ...restProfile }),
+        });
+        const data = await response.json();
+        console.log("Profile saved:", data);
+      } catch (error) {
+        console.error("Error saving profile:", error);
+      }
+    };
+
+    if (isAuthenticated) {
+      sendProfileToAPI();
+    }
+  }, [isAuthenticated, fid, displayName, custody, restProfile]);
 
   return (
     <>
       {true ? (
-        <Swiper />
+        <Swiper fid={fid} />
       ) : (
         <p>
           Click the "Sign in with Farcaster" button above, then scan the QR code

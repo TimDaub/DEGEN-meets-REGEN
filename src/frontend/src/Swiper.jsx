@@ -1,18 +1,40 @@
+import React, { useEffect, useState } from "react";
 import { CardSwiper } from "react-card-swiper";
 import ReactSvg from "./assets/react.svg";
 
-const Content = () => <h1>Lorem ipsum dolor sit amet.</h1>;
+const Content = (props) => (
+  <>
+    <h1>{props.displayName}</h1>
+    <p>{props.bio}</p>
+  </>
+);
 
-function App() {
-  const mockData = [
-    {
-      id: "88552078",
-      meta: { apk: "some-apk-a.apk" },
-      src: "https://i.seadn.io/gae/j9fZd-_CTm_AOL-AsAvwHIW57SyKQdB_amN-kgbD_TH2O1pehgvtLMOvWc9bKq-WgEzhYQ_WDOHnyib1KV9slyIXUGmRrQSInN7fZbw?w=1000&auto=format",
-      content: <Content />,
-    },
-  ];
+function App(props) {
+  const [profiles, setProfiles] = useState([]);
 
+  useEffect(() => {
+    const fetchProfiles = async () => {
+      try {
+        const response = await fetch(`/profile/random?fid=${props.fid}`);
+        if (!response.ok) throw new Error("Failed to fetch");
+        const data = await response.json();
+        const nextProfiles = data.map((elem) => ({
+          id: `${elem.fid}`,
+          meta: { apk: elem.pfpUrl },
+          src: elem.pfpUrl,
+          content: <Content displayName={elem.displayName} bio={elem.bio} />,
+        }));
+        setProfiles(nextProfiles);
+      } catch (error) {
+        console.error("Error fetching profile:", error);
+      }
+    };
+
+    fetchProfiles();
+  }, []); // Add dependencies if needed
+
+  console.log(profiles);
+  if (profiles.length === 0) return;
   return (
     <div
       style={{
@@ -24,7 +46,7 @@ function App() {
       }}
     >
       <div style={{ width: "300px", height: "500px" }}>
-        <CardSwiper data={mockData} emptyState={<div>Empty State</div>} />
+        <CardSwiper data={profiles} emptyState={<div>Empty State</div>} />
       </div>
     </div>
   );
