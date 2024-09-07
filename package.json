@@ -5,8 +5,9 @@
   "main": "src/index.mjs",
   "scripts": {
     "watch:server": "node src/index.mjs",
-    "watch:frontend": "cd src/frontend && npm run build -- --outDir ../public/",
-    "watch": "concurrently \"npm run watch:server\" \"npm run watch:frontend\""
+    "watch:frontend": "cd src/frontend && npm run build -- --emptyOutDir --outDir ../public/",
+    "watch": "concurrently \"npm run watch:server\" \"npm run watch:frontend\"",
+    "dev": "nodemon --ext js,css,jsx --watch src/frontend/src --exec \"npm run watch\""
   },
   "author": "Tim Daubenschütz <tim@daubenschuetz.de> (https://proofinprogress.com/)",
   "license": "GPL-3.0-only",
@@ -14,6 +15,7 @@
     "express": "4.19.2"
   },
   "devDependencies": {
-    "concurrently": "8.2.2"
+    "concurrently": "8.2.2",
+    "nodemon": "3.1.4"
   }
 }
