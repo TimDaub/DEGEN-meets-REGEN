@@ -118,19 +118,14 @@ function App(props) {
       </div>
     );
   const likeButton = (
-    <button style={{ fontSize: "1.5rem", backgroundColor: "#4B0082" }}>
-      🎩
-    </button>
+    <button style={{ fontSize: "1rem", backgroundColor: "#4B0082" }}>🎩</button>
   );
   const dislikeButton = (
-    <button style={{ fontSize: "1.5rem", backgroundColor: "#228B22" }}>
-      🌱
-    </button>
+    <button style={{ fontSize: "1rem", backgroundColor: "#228B22" }}>🌱</button>
   );
   return (
     <div
       style={{
-        paddingTop: "2rem",
         width: "100%",
         height: "100%",
         display: "flex",
@@ -152,7 +147,7 @@ function App(props) {
           emptyState={<Leaderboard fid={props.fid} />}
         />
       </div>
-      <p style={{ textAlign: "center" }}>
+      <p style={{ textAlign: "center", fontSize: "0.7rem" }}>
         It works like Tinder. <br />
         Swipe RIGHT to say they are DEGEN, LEFT to say they are REGEN. <br />{" "}
         You have to swipe {profiles.length - swipped} times more to see your
