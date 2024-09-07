@@ -5,7 +5,7 @@
   "main": "src/index.mjs",
   "scripts": {
     "watch:server": "node src/index.mjs",
-    "watch:frontend": "cd src/frontend && npm run dev",
+    "watch:frontend": "cd src/frontend && npm run build -- --outDir ../public/",
     "watch": "concurrently \"npm run watch:server\" \"npm run watch:frontend\""
   },
   "author": "Tim Daubenschütz <tim@daubenschuetz.de> (https://proofinprogress.com/)",
