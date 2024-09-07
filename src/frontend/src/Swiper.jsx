@@ -82,43 +82,44 @@ function App(props) {
   if (loading) {
     return <p>Loading...</p>;
   }
-  if (profiles.length === 0)
+  if (profiles.length === 0) {
     document.querySelector("body").style =
       "font-family: 'Raleway', sans-serif; width: 100%;";
-  return (
-    <div
-      style={{
-        flexDirection: "column",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <h1 style={{ alignSelf: "start", marginLeft: "1rem" }}>Leaderboard</h1>
-      <p style={{ margin: "0 1rem" }}>
-        {" "}
-        No more people to rank! Invite your friends on Warpcast! It might take a
-        while for others to rate. See your updated stats later
-      </p>
-      <a
-        target="_blank"
-        href="https://warpcast.com/~/compose?text=Think%20I%27m%20more%20of%20a%20degen%20or%20a%20regen%3F%20%0AClick%20the%20link%20below%20to%20rate%20me%20and%20other%20Farcaster%20users%20in%20%E2%80%98Degen%20or%20Regen%E2%80%99.%20&embeds[]=https://degenmeetsregen.com"
+    return (
+      <div
+        style={{
+          flexDirection: "column",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
       >
-        <button
-          style={{
-            color: "white",
-            padding: "5px 10px",
-            backgroundColor: "#472a91",
-            fontWeight: "bold",
-            marginBottom: "1rem",
-          }}
+        <h1 style={{ alignSelf: "start", marginLeft: "1rem" }}>Leaderboard</h1>
+        <p style={{ margin: "0 1rem" }}>
+          {" "}
+          No more people to rank! Invite your friends on Warpcast! It might take
+          a while for others to rate. See your updated stats later
+        </p>
+        <a
+          target="_blank"
+          href="https://warpcast.com/~/compose?text=Think%20I%27m%20more%20of%20a%20degen%20or%20a%20regen%3F%20%0AClick%20the%20link%20below%20to%20rate%20me%20and%20other%20Farcaster%20users%20in%20%E2%80%98Degen%20or%20Regen%E2%80%99.%20&embeds[]=https://degenmeetsregen.com"
         >
-          Share on Warpcast
-        </button>
-      </a>
-      <Leaderboard fid={props.fid} />
-    </div>
-  );
+          <button
+            style={{
+              color: "white",
+              padding: "5px 10px",
+              backgroundColor: "#472a91",
+              fontWeight: "bold",
+              marginBottom: "1rem",
+            }}
+          >
+            Share on Warpcast
+          </button>
+        </a>
+        <Leaderboard fid={props.fid} />
+      </div>
+    );
+  }
   const likeButton = (
     <button style={{ fontSize: "1rem", backgroundColor: "#4B0082" }}>🎩</button>
   );
