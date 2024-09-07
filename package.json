@@ -7,7 +7,10 @@
     "watch:server": "node src/index.mjs",
     "watch:frontend": "cd src/frontend && npm run build -- --emptyOutDir --outDir ../public/",
     "watch": "concurrently \"npm run watch:server\" \"npm run watch:frontend\"",
-    "dev": "nodemon --ext js,css,jsx,mjs --watch src/index.mjs --watch src/frontend/src --exec \"npm run watch\""
+    "dev": "nodemon --ext js,css,jsx,mjs --watch src/index.mjs --watch src/frontend/src --exec \"npm run watch\"",
+    "connect": "ssh root@5.161.79.48",
+    "deploy": "npm run watch:frontend && npm run rsync",
+    "rsync": "rsync -avz . root@5.161.79.48:./degenmeetsregen --exclude \"node_modules\" --exclude=\".git\""
   },
   "author": "Tim Daubenschütz <tim@daubenschuetz.de> (https://proofinprogress.com/)",
   "license": "GPL-3.0-only",

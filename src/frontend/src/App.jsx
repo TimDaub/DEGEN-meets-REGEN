@@ -41,15 +41,17 @@ function App() {
             fontSize: "1.3rem",
             fontWeight: "bold",
             fontFamily: "Kavoon",
+            width: "30wv",
           }}
         >
-          Degen meets Regen
+          🎩 meets 🌱
         </div>
         <div style={{ position: "fixed", top: "12px", right: "12px" }}>
           {!fid && !isAuthenticated && <SignInButton />}
         </div>
         <div
           style={{
+            marginTop: "5rem",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",

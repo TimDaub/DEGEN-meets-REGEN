@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 function Leaderboard({ fid }) {
   const [leaderboardData, setLeaderboardData] = useState([]);
   const [stats, setStats] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
@@ -26,8 +27,10 @@ function Leaderboard({ fid }) {
     }
 
     fetchData();
+    setLoading(false);
   }, [fid]);
 
+  if (loading) return <p>Loading leaderboard</p>;
   return (
     <div>
       <div
@@ -50,6 +53,9 @@ function Leaderboard({ fid }) {
               boxSizing: "border-box",
             }}
           >
+            <span style={{ fontSize: "1.3rem", marginRight: "1rem" }}>
+              Your stats:
+            </span>
             <img
               src={pfpUrl}
               alt="Profile"
@@ -90,6 +96,9 @@ function Leaderboard({ fid }) {
                 boxSizing: "border-box",
               }}
             >
+              <span style={{ fontSize: "1.3rem", marginRight: "1rem" }}>
+                # {index + 1}
+              </span>
               <img
                 src={pfpUrl}
                 alt="Profile"
