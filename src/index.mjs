@@ -20,7 +20,7 @@ app.get("/profile/leaderboard/:fid", async (req, res) => {
         JOIN "Match" m ON u.fid = m."user2Fid"
         WHERE u.fid != ${parseInt(fid, 10)}
         GROUP BY u."pfpUrl", u."displayName"
-        ORDER BY total DESC
+        ORDER BY likes DESC
         LIMIT 10
 
      `;
