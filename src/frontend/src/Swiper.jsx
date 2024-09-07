@@ -60,7 +60,13 @@ function App(props) {
           id: elem.fid,
           meta: { apk: elem.pfpUrl },
           src: elem.pfpUrl,
-          content: <Content displayName={elem.displayName} bio={elem.bio} />,
+          content: (
+            <Content
+              username={elem.username}
+              displayName={elem.displayName}
+              bio={elem.bio}
+            />
+          ),
         }));
         setProfiles(nextProfiles);
       } catch (error) {
