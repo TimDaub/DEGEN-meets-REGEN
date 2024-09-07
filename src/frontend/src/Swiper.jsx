@@ -19,7 +19,7 @@ function App(props) {
 
     const match = action === "like";
     //const matcherFid = props.fid; // The matcher's fid
-    const matcherFid = props.fid;
+    const matcherFid = parseInt(props.fid, 10);
     const matcheeFid = id; // The matchee's fid
 
     try {
