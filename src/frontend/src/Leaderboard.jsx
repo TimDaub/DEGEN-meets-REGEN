@@ -84,8 +84,9 @@ function Leaderboard({ fid }) {
         }}
       >
         {leaderboardData.map(
-          ({ pfpUrl, displayName, likes, dislikes }, index) => (
+          ({ pfpUrl, displayName, likes, dislikes, username }, index) => (
             <div
+              onClick={() => window.open(`https://warpcast.com/${username}`)}
               key={index}
               style={{
                 display: "flex",
@@ -111,7 +112,11 @@ function Leaderboard({ fid }) {
                 }}
               />
               <div style={{ flex: 1 }}>
-                <div style={{ fontWeight: "bold" }}>{displayName}</div>
+                <div
+                  style={{ textDecoration: "underline", fontWeight: "bold" }}
+                >
+                  {displayName}
+                </div>
                 <div style={{ fontSize: "0.8rem" }}>
                   {likes} 🎩 {dislikes} 🌱
                 </div>

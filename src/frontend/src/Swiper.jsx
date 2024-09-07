@@ -137,6 +137,7 @@ function App(props) {
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "column",
+        paddingTop: "1rem",
       }}
     >
       <div style={{ width: "300px", height: "500px" }}>

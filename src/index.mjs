@@ -12,13 +12,13 @@ app.get("/profile/leaderboard/:fid", async (req, res) => {
   const { fid } = req.params;
   try {
     let stats = await prisma.$queryRaw`
-            SELECT u."pfpUrl", u."displayName",
+            SELECT u."pfpUrl", u."displayName", u."username",
                SUM(CASE WHEN m.liked = true THEN 1 ELSE 0 END) AS likes,
                SUM(CASE WHEN m.liked = false THEN 1 ELSE 0 END) AS dislikes,
                (SUM(CASE WHEN m.liked = true THEN 1 ELSE 0 END) + SUM(CASE WHEN m.liked = false THEN 1 ELSE 0 END)) AS total
         FROM "User" u
         JOIN "Match" m ON u.fid = m."user2Fid"
-        GROUP BY u."pfpUrl", u."displayName"
+        GROUP BY u."pfpUrl", u."displayName", u."username"
         ORDER BY likes DESC
         LIMIT 50
 
