@@ -21,7 +21,7 @@ app.get("/profile/leaderboard/:fid", async (req, res) => {
         WHERE u.fid != ${parseInt(fid, 10)}
         GROUP BY u."pfpUrl", u."displayName"
         ORDER BY likes DESC
-        LIMIT 10
+        LIMIT 50
 
      `;
     stats = stats.map((stat) => ({
