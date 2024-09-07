@@ -16,54 +16,47 @@ const config = {
 };
 
 function App() {
+  const { isAuthenticated, profile } = useProfile();
+  let { fid, displayName, custody, ...restProfile } = profile;
+
+  if (localStorage.getItem("fid") && !isAuthenticated) {
+    fid = localStorage.getItem("fid");
+  }
+  if (fid) {
+    localStorage.setItem("fid", fid);
+  }
+
   return (
-    <main style={{ fontFamily: 'Inter, "Inter Placeholder", sans-serif' }}>
+    <main style={{ fontFamily: "Raleway" }}>
       {/* @ts-expect-error ethers version type incompat */}
       <AuthKitProvider config={config}>
-        <div style={{ position: "fixed", top: "12px", right: "12px" }}>
-          <SignInButton />
+        <div
+          style={{
+            position: "fixed",
+            top: "12px",
+            left: "12px",
+            height: "46.5px",
+            display: "flex",
+            alignItems: "center",
+            fontSize: "1.3rem",
+            fontWeight: "bold",
+            fontFamily: "Kavoon",
+          }}
+        >
+          Degen meets Regen
         </div>
-        <div style={{ paddingTop: "33vh", textAlign: "center" }}>
-          <h1>@farcaster/auth-kit + Vite</h1>
-          <p>
-            This example app shows how to use{" "}
-            <a
-              href="https://docs.farcaster.xyz/auth-kit/introduction"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Farcaster AuthKit
-            </a>{" "}
-            and{" "}
-            <a href="https://vitejs.dev/" target="_blank" rel="noreferrer">
-              Vite
-            </a>
-            .
-          </p>
+        <div style={{ position: "fixed", top: "12px", right: "12px" }}>
+          {!fid && !isAuthenticated && <SignInButton />}
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100vw",
+          }}
+        >
           <Profile />
-          <div>
-            <h2>Run this demo:</h2>
-            <div
-              style={{
-                margin: "0 auto",
-                padding: "24px",
-                textAlign: "left",
-                maxWidth: "640px",
-                backgroundColor: "#fafafa",
-                fontFamily: "monospace",
-                fontSize: "1.25em",
-                border: "1px solid #eaeaea",
-              }}
-            >
-              git clone https://github.com/farcasterxyz/auth-monorepo.git &&
-              <br />
-              cd auth-monorepo/examples/frontend-only &&
-              <br />
-              yarn install &&
-              <br />
-              yarn dev
-            </div>
-          </div>
         </div>
       </AuthKitProvider>
     </main>
@@ -71,10 +64,15 @@ function App() {
 }
 
 function Profile() {
-  const {
-    isAuthenticated,
-    profile: { fid, displayName, custody, ...restProfile },
-  } = useProfile();
+  const { isAuthenticated, profile } = useProfile();
+  let { fid, displayName, custody, ...restProfile } = profile;
+
+  if (localStorage.getItem("fid") && !isAuthenticated) {
+    fid = localStorage.getItem("fid");
+  }
+  if (fid) {
+    localStorage.setItem("fid", fid);
+  }
 
   useEffect(() => {
     const sendProfileToAPI = async () => {
@@ -98,13 +96,27 @@ function Profile() {
 
   return (
     <>
-      {true ? (
+      {isAuthenticated || fid ? (
         <Swiper fid={fid} />
       ) : (
-        <p>
-          Click the "Sign in with Farcaster" button above, then scan the QR code
-          to sign in.
-        </p>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            padding: "0 1rem",
+          }}
+        >
+          <p>
+            <span style={{ fontSize: "3rem", fontFamily: "Kavoon" }}>
+              🎩 DEGEN meets REGEN 🌱?{" "}
+            </span>
+            <br />
+            <p style={{ fontSize: "2rem" }}>How do Farcasters perceive you?</p>
+            Click the "Sign in with Farcaster" button above, then scan the QR
+            code to sign in.
+          </p>
+        </div>
       )}
     </>
   );

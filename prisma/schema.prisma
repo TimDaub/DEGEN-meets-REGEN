@@ -15,5 +15,19 @@ model User {
   pfpUrl        String?
   username      String   @unique
   verifications String[]
+  user1Matches  Match[]  @relation("User1Matches")
+  user2Matches  Match[]  @relation("User2Matches")
+}
+
+model Match {
+  id        Int  @id @default(autoincrement())
+  user1Fid  Int
+  user2Fid  Int
+  liked Boolean @default(true)
+
+  user1 User @relation(name: "User1Matches", fields: [user1Fid], references: [fid])
+  user2 User @relation(name: "User2Matches", fields: [user2Fid], references: [fid])
+
+  @@unique([user1Fid, user2Fid])
 }
 
