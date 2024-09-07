@@ -18,7 +18,6 @@ app.get("/profile/leaderboard/:fid", async (req, res) => {
                (SUM(CASE WHEN m.liked = true THEN 1 ELSE 0 END) + SUM(CASE WHEN m.liked = false THEN 1 ELSE 0 END)) AS total
         FROM "User" u
         JOIN "Match" m ON u.fid = m."user2Fid"
-        WHERE u.fid != ${parseInt(fid, 10)}
         GROUP BY u."pfpUrl", u."displayName"
         ORDER BY likes DESC
         LIMIT 50
