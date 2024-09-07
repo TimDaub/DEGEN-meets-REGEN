@@ -5,7 +5,11 @@ import Leaderboard from "./Leaderboard.jsx";
 
 const Content = (props) => (
   <div style={{ padding: "0 1rem", color: "black" }}>
-    <h1 style={{ fontSize: "1.6rem" }}>{props.displayName}</h1>
+    <a target="_blank" href={`https://warpcast.com/${props.username}`}>
+      <h1 style={{ fontSize: "1.6rem", textDecoration: "underline" }}>
+        {props.displayName}
+      </h1>
+    </a>
     <p>{props.bio}</p>
   </div>
 );
@@ -85,7 +89,8 @@ function App(props) {
         <h1 style={{ alignSelf: "start", marginLeft: "1rem" }}>Leaderboard</h1>
         <p style={{ margin: "0 1rem" }}>
           {" "}
-          No more people to rank! Invite your friends on Warpcast!
+          No more people to rank! Invite your friends on Warpcast! It might take
+          a while for others to rate. See your updated stats later
         </p>
         <a
           target="_blank"
@@ -141,7 +146,12 @@ function App(props) {
           emptyState={<Leaderboard fid={props.fid} />}
         />
       </div>
-      <p>Swipe {profiles.length - swipped} times more to see your stats</p>
+      <p style={{ textAlign: "center" }}>
+        It works like Tinder. <br />
+        Swipe RIGHT to say they are DEGEN, LEFT to say they are REGEN. <br />{" "}
+        You have to swipe {profiles.length - swipped} times more to see your
+        stats
+      </p>
     </div>
   );
 }

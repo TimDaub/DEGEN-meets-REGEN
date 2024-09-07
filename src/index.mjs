@@ -109,7 +109,7 @@ app.get("/profile/random", async (req, res) => {
          SELECT "user2Fid" FROM "Match" WHERE "user1Fid" = ${fid}
        )
        ORDER BY RANDOM()
-       LIMIT 100
+       LIMIT 5
      `;
     if (randomUsers.length > 0) {
       res.json(randomUsers);
